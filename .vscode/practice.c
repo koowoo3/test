@@ -1,26 +1,17 @@
 #include<stdio.h>
-int target;
-int binsearch(int a[], int start, int end){
+void hanoi(int num, char from, char by, char to){
 
-    int mid = (start + end)/2;
-
-    if(start>end)
-        return -1;
-    if(a[mid]==target)
-        return mid;
-    else if(a[mid]>target)
-        return binsearch(a, start, mid-1);
-    else 
-        return binsearch(a, mid+1, end);
-
-}
-int main(){
-    int arr[] = {1,3,5,7,9};
-    scanf("%d", &target);
-    if(binsearch(arr, 0, 4)!=-1){
-        printf("%d", binsearch(arr, 0, 4));
-        return 0;
+    if(num == 1){
+        printf("원반 1을 %c 에서 %c로 이동\n", from, to);
     }
-    printf("There's no target");
+    else{
+        hanoi(num-1, from, to, by);
+        printf("원반 %d를 %c에서 %c로 이동 \n", num, from, to);
+        hanoi(num-1, by, from, to);
+    }
+}
 
+int main(void){
+    hanoi(3, 'A', 'B','C');
+    return 0;
 }
